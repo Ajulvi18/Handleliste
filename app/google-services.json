@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1003589104165",
+    "project_id": "huskeliste-30d5c",
+    "storage_bucket": "huskeliste-30d5c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003589104165:android:588003361d88cbad5785cc",
+        "android_client_info": {
+          "package_name": "com.example.handleliste"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1003589104165-2bboq8dtnf406op94f5ejlqljvlpr825.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEY46jibGTq-j65WVUyFsZFY1CUm_jLww"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1003589104165-2bboq8dtnf406op94f5ejlqljvlpr825.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

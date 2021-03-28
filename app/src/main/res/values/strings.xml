@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">ListLister</string>
-    <string name="add_flower">Add Flower</string>
+    <string name="add_list">Add Flower</string>
 
     <string name="List1_name">Rose</string>
     <string name="List2_name">Freesia</string>
@@ -36,7 +36,7 @@
     <string name="flower_string">Flowers</string>
     <string name="flower_finder">Flower finder</string>
     <string name="flower_description_edit_text">Flower Description</string>
-    <string name="flower_name_edit_text">Flower Name</string>
+    <string name="list_name_edit_text">Name your list</string>
     <string name="done_button_text">Done</string>
     <string name="fab_content_description">fab</string>
     <string name="flower_image_content_description">Image of flower</string>

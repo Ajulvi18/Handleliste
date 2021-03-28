@@ -6,22 +6,22 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.handleliste.data.ListItem
 import kotlin.random.Random
 
-class ItemListViewModel(val dataSource: Datasource) : ViewModel() {
+class ItemListViewModel(val dataSource: Datasource, context: Context) : ViewModel() {
 
     val listLiveData = dataSource.getListOfLists()
 
-    fun insetItem(itemName: String?, itemDescription: String?) {
-        if (itemName == null || itemDescription == null) {
+    fun insertItem(itemName: String?, context: Context) {
+        if (itemName == null) {
             return
         }
 
         val newItemList = ListItem(
             Random.nextLong(),
             itemName,
-            itemDescription
+            "desk"
         )
 
-        dataSource.addNewList(newItemList)
+        dataSource.addNewList(newItemList, context)
     }
 }
 
@@ -31,7 +31,8 @@ class ItemListViewModelFactory (private val context: Context) : ViewModelProvide
         if (modelClass.isAssignableFrom(ItemListViewModel::class.java)) {
             @Suppress("UNCHECK_CAST")
             return ItemListViewModel(
-                dataSource =  Datasource.getDataSource(context.resources)
+                dataSource =  Datasource.getDataSource(context.resources),
+                context = context
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")

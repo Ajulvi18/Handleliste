@@ -50,17 +50,25 @@ class MainActivity : AppCompatActivity() {
         storage = Firebase.storage
 
         val itemAdapter = ItemAdapter { ListItem -> onListClick(ListItem) }
-        val data = Datasource.INSTANCE?.initialize(this)
         val recyclerView: RecyclerView = findViewById(R.id.ItemCycler)
         recyclerView.adapter = itemAdapter
         itemAdapter.submitList(emptyList<ListItem>())
+        /*
         Datasource.INSTANCE?.onLiveData = {
-            Datasource.INSTANCE?.listItemLiveData?.observe(this, {
+            itemListViewModel.listLiveData.observe(this, {
                 it?.let {
                     itemAdapter.submitList(it as MutableList<ListItem>)
                 }
             })
-        }
+        }*/
+
+        itemListViewModel.listLiveData.observe(this, {
+            it?.let {
+                itemAdapter.submitList(it as MutableList<ListItem>)
+            }
+        })
+
+        itemListViewModel.getData(this)
 
 
 

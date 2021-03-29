@@ -74,14 +74,25 @@ class Datasource(resources: Resources) {
         return listItemLiveData
     }
 
-    fun replaceList(newItem: subList, oldItem: subList?, context: Context) {
-        removeList(oldItem)
-        addNewList(newItem, context)
+    fun updateList(itemToRemove: subList?, itemToAdd: subList, context: Context ) {
+        var storageRef = storage.reference
+        var jsonRef = storageRef.child("Lists.json")
+        val currentList = listItemLiveData.value
+        if (currentList != null) {
+            val updatedList = currentList.toMutableList()
+            updatedList.remove(itemToRemove)
+            updatedList.add(0, itemToAdd)
+
+            val json = toJson(Lister(updatedList))
+            val filename = "Lists.json"
+            val file = File(context.filesDir, filename)
+            context.openFileOutput(filename, Context.MODE_PRIVATE).use {
+                it.write(json.toByteArray())
+            }
+            val uploadTask = jsonRef.putFile(Uri.fromFile(file))
+            listItemLiveData.postValue(updatedList)
+        }
     }
-
-
-
-
 
     companion object {
         var INSTANCE: Datasource? = null

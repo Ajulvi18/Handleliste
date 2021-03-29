@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.activity.viewModels
 import com.example.handleliste.data.ListItem
+import com.example.handleliste.data.subList
 import com.example.handleliste.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -49,10 +50,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         storage = Firebase.storage
 
-        val itemAdapter = ItemAdapter { ListItem -> onListClick(ListItem) }
+        val itemAdapter = ItemAdapter { subList -> onListClick(subList) }
         val recyclerView: RecyclerView = findViewById(R.id.ItemCycler)
         recyclerView.adapter = itemAdapter
-        itemAdapter.submitList(emptyList<ListItem>())
+        itemAdapter.submitList(emptyList<subList>())
         /*
         Datasource.INSTANCE?.onLiveData = {
             itemListViewModel.listLiveData.observe(this, {
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         itemListViewModel.listLiveData.observe(this, {
             it?.let {
-                itemAdapter.submitList(it as MutableList<ListItem>)
+                itemAdapter.submitList(it as MutableList<subList>)
             }
         })
 
@@ -78,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun onListClick(listItem: ListItem) {
+    private fun onListClick(sublist: subList) {
         val toast = Toast.makeText(applicationContext, "item clicked", Toast.LENGTH_LONG)
         toast.show()
     }

@@ -12,16 +12,22 @@ data class ListItem(
     val description: String
 )
 
-data class Example(
+data class subList(
     @SerializedName("array")
-    var array: List<ListItem>? = null
+    var array: List<ListItem>? = null,
+    @SerializedName("listname")
+    val listname:String,
 )
 
+data class Lister(
+    @SerializedName("list")
+    var list: List<subList>
+)
 
-public fun fromJson(json:String):Example{
-    return Gson().fromJson<Example>(json, Example::class.java)
+public fun fromJson(json:String):Lister{
+    return Gson().fromJson<Lister>(json, Lister::class.java)
 }
 
-public fun toJson(example: Example):String{
+public fun toJson(example: Lister):String{
     return Gson().toJson(example)
 }

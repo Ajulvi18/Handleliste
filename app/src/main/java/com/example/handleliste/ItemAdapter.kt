@@ -7,14 +7,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.handleliste.data.ListItem
+import com.example.handleliste.data.subList
 import com.example.handleliste.databinding.ItemCardBinding
 
-class ItemAdapter(private val onClick: (ListItem) -> Unit) : ListAdapter<ListItem, ItemAdapter.ItemViewHolder>(ItemDiffCallback) {
+class ItemAdapter(private val onClick: (subList) -> Unit) : ListAdapter<subList, ItemAdapter.ItemViewHolder>(ItemDiffCallback) {
 
-    class ItemViewHolder(itemView: View, val onClick: (ListItem) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    class ItemViewHolder(itemView: View, val onClick: (subList) -> Unit) : RecyclerView.ViewHolder(itemView) {
         private val itemTextView: TextView = itemView.findViewById(R.id.item_text)
-        private var currentItem: ListItem? = null
+        private var currentItem: subList? = null
 
         init{
             itemView.setOnClickListener {
@@ -24,10 +24,10 @@ class ItemAdapter(private val onClick: (ListItem) -> Unit) : ListAdapter<ListIte
             }
         }
 
-        fun bind(item: ListItem) {
+        fun bind(item: subList) {
             currentItem = item
 
-            itemTextView.text = item.name
+            itemTextView.text = item.listname
         }
     }
 
@@ -43,12 +43,12 @@ class ItemAdapter(private val onClick: (ListItem) -> Unit) : ListAdapter<ListIte
     }
 }
 
-object ItemDiffCallback : DiffUtil.ItemCallback<ListItem>() {
-    override fun areItemsTheSame(oldItem: ListItem, newItem: ListItem): Boolean {
+object ItemDiffCallback : DiffUtil.ItemCallback<subList>() {
+    override fun areItemsTheSame(oldItem: subList, newItem: subList): Boolean {
         return oldItem == newItem
     }
 
-    override fun areContentsTheSame(oldItem: ListItem, newItem: ListItem): Boolean {
-        return oldItem.name == newItem.name
+    override fun areContentsTheSame(oldItem: subList, newItem: subList): Boolean {
+        return oldItem.listname == newItem.listname
     }
 }

@@ -3,12 +3,11 @@ package com.example.handleliste.data
 import android.content.res.Resources
 import com.example.handleliste.R
 
-fun itemsList(resources: Resources): List<ListItem> {
+fun itemsList(resources: Resources): List<subList> {
     return listOf(
-            ListItem(
-                    id = 1,
-                    name = resources.getString(R.string.List1_name),
-                    description = "desk"
+            subList(
+                    array = emptyList<ListItem>(),
+                    listname = resources.getString(R.string.List1_name)
             )
     )
 }

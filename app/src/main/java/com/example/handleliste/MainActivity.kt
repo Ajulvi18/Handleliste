@@ -10,7 +10,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.activity.viewModels
 import com.example.handleliste.data.ListItem
+import com.example.handleliste.data.subList
 import com.example.handleliste.databinding.ActivityMainBinding
+import com.example.handleliste.listdetail.ListDetailActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -18,7 +20,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 
 
-const val ITEM_ID = "item id"
+const val LIST_ID = "list id"
 
 class MainActivity : AppCompatActivity() {
 
@@ -49,41 +51,35 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         storage = Firebase.storage
 
-        val itemAdapter = ItemAdapter { ListItem -> onListClick(ListItem) }
+        val itemAdapter = ItemAdapter { subList -> onListClick(subList) }
         val recyclerView: RecyclerView = findViewById(R.id.ItemCycler)
         recyclerView.adapter = itemAdapter
-        itemAdapter.submitList(emptyList<ListItem>())
-        /*
-        Datasource.INSTANCE?.onLiveData = {
-            itemListViewModel.listLiveData.observe(this, {
-                it?.let {
-                    itemAdapter.submitList(it as MutableList<ListItem>)
-                }
-            })
-        }*/
+        itemAdapter.submitList(emptyList<subList>())
+
 
         itemListViewModel.listLiveData.observe(this, {
             it?.let {
-                itemAdapter.submitList(it as MutableList<ListItem>)
+                itemAdapter.submitList(it as MutableList<subList>)
             }
         })
 
         itemListViewModel.getData(this)
 
-
-
         val fab: View = findViewById(R.id.fab)
         fab.setOnClickListener {
             fabOnClick()
         }
+
     }
 
-    private fun onListClick(listItem: ListItem) {
-        val toast = Toast.makeText(applicationContext, "item clicked", Toast.LENGTH_LONG)
-        toast.show()
+    private fun onListClick(sublist: subList) {
+        val intent = Intent(this, ListDetailActivity()::class.java)
+        intent.putExtra(LIST_ID, sublist.id)
+        startActivity(intent)
     }
 
     private fun fabOnClick() {
+
         val intent = Intent(this, AddNewList::class.java)
         startActivityForResult(intent, newItemActivityRequestCode)
     }

@@ -18,7 +18,7 @@ import java.io.File
 
 class Datasource(resources: Resources) {
 
-    var onLiveData: ((LiveData<List<ListItem>>) -> Unit)? = null
+    var onLiveData: ((LiveData<List<subList>>) -> Unit)? = null
 
 
 
@@ -28,11 +28,11 @@ class Datasource(resources: Resources) {
     val listItemLiveData = MutableLiveData(initialItemList)
     val storage = Firebase.storage
 
-    fun update(updatedList: List<ListItem>?){
+    fun update(updatedList: List<subList>?){
         listItemLiveData.postValue(updatedList)
     }
 
-    fun addNewList(listItem: ListItem, context: Context){
+    fun addNewList(listItem: subList, context: Context){
 
         val currentList = listItemLiveData.value
         var storageRef = storage.reference
@@ -43,7 +43,7 @@ class Datasource(resources: Resources) {
             val updatedList = currentList.toMutableList()
             updatedList.add(0, listItem)
 
-            val json = toJson(Example(updatedList))
+            val json = toJson(Lister(updatedList))
             val filename = "Lists.json"
             val file = File(context.filesDir, filename)
             context.openFileOutput(filename, Context.MODE_PRIVATE).use {
@@ -54,7 +54,7 @@ class Datasource(resources: Resources) {
         }
     }
 
-    fun removeList(listItem: ListItem) {
+    fun removeList(listItem: subList?) {
         val currentList = listItemLiveData.value
         if (currentList != null) {
             val updatedList = currentList.toMutableList()
@@ -63,15 +63,22 @@ class Datasource(resources: Resources) {
         }
     }
 
-    fun getListFromId(id: Long): ListItem? {
+    fun getListFromId(id: Long): subList? {
         listItemLiveData.value?.let { lists ->
             return lists.firstOrNull{ it.id == id}
         }
         return null
     }
-    fun getListOfLists(): LiveData<List<ListItem>> {
+
+    fun getListOfLists(): LiveData<List<subList>> {
         return listItemLiveData
     }
+
+    fun replaceList(newItem: subList, oldItem: subList?, context: Context) {
+        removeList(oldItem)
+        addNewList(newItem, context)
+    }
+
 
 
 

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.handleliste.data.ListItem
 import com.example.handleliste.data.fromJson
+import com.example.handleliste.data.subList
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import java.io.File
@@ -20,10 +21,10 @@ class ItemListViewModel(val dataSource: Datasource, context: Context) : ViewMode
             return
         }
 
-        val newItemList = ListItem(
-            Random.nextLong(),
-            itemName,
-            "desk"
+        val newItemList = subList(
+                Random.nextLong(),
+                emptyList<ListItem>(),
+                itemName
         )
 
         dataSource.addNewList(newItemList, context)
@@ -41,7 +42,7 @@ class ItemListViewModel(val dataSource: Datasource, context: Context) : ViewMode
                 }
             }
             val list = fromJson(content)
-            dataSource.update(list.array)
+            dataSource.update(list.list)
 
         }.addOnFailureListener {
             // Handle any errors

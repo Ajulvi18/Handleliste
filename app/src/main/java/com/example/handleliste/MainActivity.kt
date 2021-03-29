@@ -12,6 +12,7 @@ import androidx.activity.viewModels
 import com.example.handleliste.data.ListItem
 import com.example.handleliste.data.subList
 import com.example.handleliste.databinding.ActivityMainBinding
+import com.example.handleliste.listdetail.ListDetailActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -19,7 +20,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 
 
-const val ITEM_ID = "item id"
+const val LIST_ID = "list id"
 
 class MainActivity : AppCompatActivity() {
 
@@ -80,8 +81,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onListClick(sublist: subList) {
-        val toast = Toast.makeText(applicationContext, "item clicked", Toast.LENGTH_LONG)
-        toast.show()
+        val intent = Intent(this, ListDetailActivity()::class.java)
+        intent.putExtra(LIST_ID, sublist.id)
+        startActivity(intent)
     }
 
     private fun fabOnClick() {

@@ -4,15 +4,13 @@ import com.google.gson.Gson
 
 
 data class ListItem(
-    @SerializedName("id")
-    val id: Long,
     @SerializedName("name")
-    val name:String,
-    @SerializedName("description")
-    val description: String
+    val name:String
 )
 
 data class subList(
+    @SerializedName("id")
+    val id: Long,
     @SerializedName("array")
     var array: List<ListItem>? = null,
     @SerializedName("listname")

@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.handleliste.data.subList
-import com.example.handleliste.databinding.ItemCardBinding
 
 class ItemAdapter(private val onClick: (subList) -> Unit) : ListAdapter<subList, ItemAdapter.ItemViewHolder>(ItemDiffCallback) {
 

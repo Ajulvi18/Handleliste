@@ -22,6 +22,7 @@ class ItemListViewModel(val dataSource: Datasource, context: Context) : ViewMode
         }
 
         val newItemList = subList(
+                Random.nextLong(),
                 emptyList<ListItem>(),
                 itemName
         )

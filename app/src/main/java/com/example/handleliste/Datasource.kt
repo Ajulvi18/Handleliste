@@ -54,7 +54,7 @@ class Datasource(resources: Resources) {
         }
     }
 
-    fun removeList(listItem: ListItem) {
+    fun removeList(listItem: subList?) {
         val currentList = listItemLiveData.value
         if (currentList != null) {
             val updatedList = currentList.toMutableList()
@@ -62,17 +62,23 @@ class Datasource(resources: Resources) {
             listItemLiveData.postValue(updatedList)
         }
     }
-/*
-    fun getListFromId(id: Long): ListItem? {
+
+    fun getListFromId(id: Long): subList? {
         listItemLiveData.value?.let { lists ->
             return lists.firstOrNull{ it.id == id}
         }
         return null
     }
- */
+
     fun getListOfLists(): LiveData<List<subList>> {
         return listItemLiveData
     }
+
+    fun replaceList(newItem: subList, oldItem: subList?, context: Context) {
+        removeList(oldItem)
+        addNewList(newItem, context)
+    }
+
 
 
 

@@ -55,14 +55,7 @@ class MainActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = findViewById(R.id.ItemCycler)
         recyclerView.adapter = itemAdapter
         itemAdapter.submitList(emptyList<subList>())
-        /*
-        Datasource.INSTANCE?.onLiveData = {
-            itemListViewModel.listLiveData.observe(this, {
-                it?.let {
-                    itemAdapter.submitList(it as MutableList<ListItem>)
-                }
-            })
-        }*/
+
 
         itemListViewModel.listLiveData.observe(this, {
             it?.let {
@@ -72,12 +65,11 @@ class MainActivity : AppCompatActivity() {
 
         itemListViewModel.getData(this)
 
-
-
         val fab: View = findViewById(R.id.fab)
         fab.setOnClickListener {
             fabOnClick()
         }
+
     }
 
     private fun onListClick(sublist: subList) {
@@ -87,6 +79,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fabOnClick() {
+
         val intent = Intent(this, AddNewList::class.java)
         startActivityForResult(intent, newItemActivityRequestCode)
     }

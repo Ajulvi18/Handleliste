@@ -4,6 +4,7 @@ package com.example.handleliste
 import android.content.Context
 import android.content.res.Resources
 import android.net.Uri
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.volley.RequestQueue
@@ -27,21 +28,8 @@ class Datasource(resources: Resources) {
     val listItemLiveData = MutableLiveData(initialItemList)
     val storage = Firebase.storage
 
-    fun initialize(context: Context){
-        var storageRef = storage.reference
-        val filename = "Lists"
-        val file = File(context.filesDir, filename)
-        storageRef.getFile(file).addOnSuccessListener {
-            val content = context.openFileInput(filename).bufferedReader().useLines { lines ->
-                lines.fold("") { some, text ->
-                    "$some\n$text"
-                }
-            }
-            val list = fromJson(content)
-            listItemLiveData.postValue(list.array)
-        }.addOnFailureListener {
-            // Handle any errors
-        }
+    fun update(updatedList: List<ListItem>?){
+        listItemLiveData.postValue(updatedList)
     }
 
     fun addNewList(listItem: ListItem, context: Context){

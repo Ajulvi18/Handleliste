@@ -31,14 +31,16 @@ class ListDetailViewModel(val dataSource: Datasource, context: Context) : ViewMo
         if (updatedList != null) {
             updatedList.add(0,newListItem)
         }
+    lateinit var updatedSubList:subList
+        if (currentList != null) {
+            updatedSubList = subList(
+                currentList.id,
+                updatedList,
+                currentList.listname
+            )
+        }
 
-        val updatedSubList = subList(
-            Random.nextLong(),
-            updatedList,
-            itemName
-        )
-
-        dataSource.replaceList(updatedSubList, currentList, context)
+        dataSource.updateList(currentList, updatedSubList, context)
     }
 }
 

@@ -5,21 +5,25 @@ import com.google.gson.Gson
 
 data class ListItem(
     @SerializedName("name")
-    val name:String
+    val name:String,
+    @SerializedName("completion")
+    val completion:Int = 0
 )
 
 data class subList(
     @SerializedName("id")
     val id: Long,
     @SerializedName("array")
-    var array: List<ListItem>? = null,
+    var array: MutableList<ListItem>? = null,
     @SerializedName("listname")
     val listname:String,
+    @SerializedName("progress")
+    val progress:Float = 0f
 )
 
 data class Lister(
     @SerializedName("list")
-    var list: List<subList>
+    var list: MutableList<subList>
 )
 
 public fun fromJson(json:String):Lister{

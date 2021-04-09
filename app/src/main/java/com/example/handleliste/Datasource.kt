@@ -28,7 +28,7 @@ class Datasource(resources: Resources) {
     val listItemLiveData = MutableLiveData(initialItemList)
     val storage = Firebase.storage
 
-    fun update(updatedList: List<subList>?){
+    fun update(updatedList: MutableList<subList>?){
         listItemLiveData.postValue(updatedList)
     }
 
@@ -38,7 +38,7 @@ class Datasource(resources: Resources) {
         var storageRef = storage.reference
         var jsonRef = storageRef.child("Lists.json")
         if (currentList == null) {
-            listItemLiveData.postValue(listOf(listItem))
+            listItemLiveData.postValue(mutableListOf(listItem))
         } else {
             val updatedList = currentList.toMutableList()
             updatedList.add(0, listItem)
@@ -70,28 +70,30 @@ class Datasource(resources: Resources) {
         return null
     }
 
-    fun getListOfLists(): LiveData<List<subList>> {
+    fun getListOfLists(): MutableLiveData<MutableList<subList>> {
         return listItemLiveData
     }
 
-    fun updateList(itemToRemove: subList?, itemToAdd: subList, context: Context ) {
+    fun updateList(listToUpdate: subList, itemToAdd: ListItem, context: Context ) {
+        lateinit var json:String
         var storageRef = storage.reference
         var jsonRef = storageRef.child("Lists.json")
-        val currentList = listItemLiveData.value
-        if (currentList != null) {
-            val updatedList = currentList.toMutableList()
-            updatedList.remove(itemToRemove)
-            updatedList.add(0, itemToAdd)
 
-            val json = toJson(Lister(updatedList))
-            val filename = "Lists.json"
-            val file = File(context.filesDir, filename)
-            context.openFileOutput(filename, Context.MODE_PRIVATE).use {
-                it.write(json.toByteArray())
-            }
-            val uploadTask = jsonRef.putFile(Uri.fromFile(file))
-            listItemLiveData.postValue(updatedList)
+        listToUpdate.array?.add(itemToAdd)
+
+        val updatedList = listItemLiveData.value
+
+        if (updatedList != null){
+            json = toJson(Lister(updatedList))
         }
+        val filename = "Lists.json"
+        val file = File(context.filesDir, filename)
+        context.openFileOutput(filename, Context.MODE_PRIVATE).use {
+            it.write(json.toByteArray())
+        }
+        val uploadTask = jsonRef.putFile(Uri.fromFile(file))
+        listItemLiveData.postValue(updatedList)
+
     }
 
     companion object {

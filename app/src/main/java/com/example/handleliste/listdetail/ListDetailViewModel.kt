@@ -44,6 +44,10 @@ class ListDetailViewModel(val dataSource: Datasource, context: Context) : ViewMo
             dataSource.updateList(currentList, newListItem, context)
         }
     }
+
+    fun sync(context: Context) {
+        dataSource.firebaseSync(context)
+    }
 }
 
 class ListDetailViewModelFactory (private val context: Context) : ViewModelProvider.Factory {

@@ -7,7 +7,7 @@ data class ListItem(
     @SerializedName("name")
     val name:String,
     @SerializedName("completion")
-    val completion:Int = 0
+    var completion:Int = 0
 )
 
 data class subList(

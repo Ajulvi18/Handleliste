@@ -65,6 +65,7 @@ class ListDetailActivity : AppCompatActivity() {
         }
         checkBox = itemView.findViewById(R.id.checkBox)
         checkBox.isChecked = listItem.completion != 0
+
         listDetailViewModel.sync(this)
     }
     private fun fabOnClick(id:Long, context: Context) {

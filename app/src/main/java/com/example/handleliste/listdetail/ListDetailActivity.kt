@@ -65,6 +65,8 @@ class ListDetailActivity : AppCompatActivity() {
         } else {
             val ItemName =  addItemName.text.toString()
             listDetailViewModel.insertItem(ItemName, context, id)
+            finish();
+            startActivity(getIntent());
         }
     }
 }

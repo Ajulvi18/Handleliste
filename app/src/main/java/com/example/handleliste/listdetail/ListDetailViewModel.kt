@@ -18,7 +18,7 @@ class ListDetailViewModel(val dataSource: Datasource, context: Context) : ViewMo
     fun getListForId(id: Long) : subList? {
         return dataSource.getListFromId(id)
     }
-//TODO: fix insert Item
+
     fun insertItem(itemName: String?, context: Context, id: Long) {
         if (itemName == null) {
             return
@@ -40,7 +40,9 @@ class ListDetailViewModel(val dataSource: Datasource, context: Context) : ViewMo
             )
         }
 
-        dataSource.updateList(currentList, updatedSubList, context)
+        if (currentList != null) {
+            dataSource.updateList(currentList, newListItem, context)
+        }
     }
 }
 

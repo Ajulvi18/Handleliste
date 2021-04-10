@@ -18,7 +18,7 @@ data class subList(
     @SerializedName("listname")
     val listname:String,
     @SerializedName("progress")
-    val progress:Int = 0
+    var progress:Int = 0
 )
 
 data class Lister(

@@ -65,6 +65,7 @@ class ListDetailActivity : AppCompatActivity() {
         }
         checkBox = itemView.findViewById(R.id.checkBox)
         checkBox.isChecked = listItem.completion != 0
+        listDetailViewModel.updateProgress()
 
         listDetailViewModel.sync(this)
     }

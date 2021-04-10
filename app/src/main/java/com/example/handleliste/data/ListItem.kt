@@ -7,7 +7,7 @@ data class ListItem(
     @SerializedName("name")
     val name:String,
     @SerializedName("completion")
-    val completion:Int = 0
+    var completion:Int = 0
 )
 
 data class subList(
@@ -18,7 +18,7 @@ data class subList(
     @SerializedName("listname")
     val listname:String,
     @SerializedName("progress")
-    val progress:Float = 0f
+    var progress:Int = 0
 )
 
 data class Lister(

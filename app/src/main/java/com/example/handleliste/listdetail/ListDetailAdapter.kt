@@ -5,6 +5,7 @@ import com.example.handleliste.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -13,16 +14,17 @@ import com.example.handleliste.data.ListItem
 import com.example.handleliste.data.subList
 import com.example.handleliste.databinding.ItemCardBinding
 
-class ListDetailAdapter(private val onClick: (ListItem) -> Unit) : ListAdapter<ListItem, ListDetailAdapter.ListDetailViewHolder>(ItemDiffCallback) {
+class ListDetailAdapter(private val onClick: (ListItem, View) -> Unit) : ListAdapter<ListItem, ListDetailAdapter.ListDetailViewHolder>(ItemDiffCallback) {
 
-    class ListDetailViewHolder(itemView: View, val onClick: (ListItem) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    class ListDetailViewHolder(itemView: View, val onClick: (ListItem, View) -> Unit) : RecyclerView.ViewHolder(itemView) {
         private val itemTextView: TextView = itemView.findViewById(R.id.list_detail_text)
         private var currentItem: ListItem? = null
+        private val itemCheckBox: CheckBox = itemView.findViewById(R.id.checkBox)
 
         init{
             itemView.setOnClickListener {
                 currentItem?.let {
-                    onClick(it)
+                    onClick(it, itemView)
                 }
             }
         }
@@ -31,6 +33,7 @@ class ListDetailAdapter(private val onClick: (ListItem) -> Unit) : ListAdapter<L
             currentItem = item
 
             itemTextView.text = item.name
+            itemCheckBox.isChecked = item.completion != 0
         }
     }
 

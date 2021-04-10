@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -35,7 +36,7 @@ class ListDetailActivity : AppCompatActivity() {
             currentListId = bundle.getLong(LIST_ID)
         }
 
-        val listDetailAdapter = ListDetailAdapter { ListItem -> onListClick(ListItem) }
+        val listDetailAdapter = ListDetailAdapter { ListItem, View -> onListClick(ListItem, View) }
         val recyclerView: RecyclerView = findViewById(R.id.ListDetailCycler)
         recyclerView.adapter = listDetailAdapter
 
@@ -55,9 +56,18 @@ class ListDetailActivity : AppCompatActivity() {
         addItemName = findViewById(R.id.add_item_name)
     }
 
-    private fun onListClick(listItem: ListItem) {
-        // do something
-        return
+    private fun onListClick(listItem: ListItem, itemView: View) {
+        lateinit var checkBox: CheckBox
+        if (listItem.completion == 1) {
+            listItem.completion = 0
+        } else {
+            listItem.completion = 1
+        }
+        checkBox = itemView.findViewById(R.id.checkBox)
+        checkBox.isChecked = listItem.completion != 0
+        listDetailViewModel.updateProgress()
+
+        listDetailViewModel.sync(this)
     }
     private fun fabOnClick(id:Long, context: Context) {
         if (addItemName.text.isNullOrEmpty()) {

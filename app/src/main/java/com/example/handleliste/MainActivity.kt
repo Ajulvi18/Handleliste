@@ -72,6 +72,24 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume(){
+        super.onResume()
+
+        val itemAdapter = ItemAdapter { subList -> onListClick(subList) }
+        val recyclerView: RecyclerView = findViewById(R.id.ItemCycler)
+        recyclerView.adapter = itemAdapter
+        itemAdapter.submitList(emptyList<subList>())
+
+
+        itemListViewModel.listLiveData.observe(this, {
+            it?.let {
+                itemAdapter.submitList(it as MutableList<subList>)
+            }
+        })
+
+        itemListViewModel.getData(this)
+    }
+
     private fun onListClick(sublist: subList) {
         val intent = Intent(this, ListDetailActivity()::class.java)
         intent.putExtra(LIST_ID, sublist.id)

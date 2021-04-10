@@ -96,6 +96,25 @@ class Datasource(resources: Resources) {
 
     }
 
+    fun firebaseSync(context: Context){
+        lateinit var json:String
+        var storageRef = storage.reference
+        var jsonRef = storageRef.child("Lists.json")
+        val updatedList = listItemLiveData.value
+        if (updatedList != null){
+            json = toJson(Lister(updatedList))
+        }
+        val filename = "Lists.json"
+        val file = File(context.filesDir, filename)
+        context.openFileOutput(filename, Context.MODE_PRIVATE).use {
+            it.write(json.toByteArray())
+        }
+        val uploadTask = jsonRef.putFile(Uri.fromFile(file))
+        listItemLiveData.postValue(updatedList)
+
+
+    }
+
     companion object {
         var INSTANCE: Datasource? = null
 

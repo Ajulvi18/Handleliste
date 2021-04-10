@@ -44,6 +44,27 @@ class ListDetailViewModel(val dataSource: Datasource, context: Context) : ViewMo
             dataSource.updateList(currentList, newListItem, context)
         }
     }
+
+    fun sync(context: Context) {
+        dataSource.firebaseSync(context)
+    }
+
+
+    fun updateProgress(){
+        var checked = 0
+        for (subList in listLiveData.value!!) {
+
+
+            for (listItem in subList.array!!) {
+                checked += listItem.completion
+            }
+            if (subList.array!!.size != 0) {
+                subList.progress = (checked * 100) / subList.array!!.size
+            }
+        }
+    }
+
+
 }
 
 class ListDetailViewModelFactory (private val context: Context) : ViewModelProvider.Factory {

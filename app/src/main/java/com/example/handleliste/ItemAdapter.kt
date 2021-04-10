@@ -3,6 +3,7 @@ package com.example.handleliste
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -13,6 +14,7 @@ class ItemAdapter(private val onClick: (subList) -> Unit) : ListAdapter<subList,
 
     class ItemViewHolder(itemView: View, val onClick: (subList) -> Unit) : RecyclerView.ViewHolder(itemView) {
         private val itemTextView: TextView = itemView.findViewById(R.id.item_text)
+        private val progressBar: ProgressBar = itemView.findViewById(R.id.progressBar)
         private var currentItem: subList? = null
 
         init{
@@ -27,6 +29,7 @@ class ItemAdapter(private val onClick: (subList) -> Unit) : ListAdapter<subList,
             currentItem = item
 
             itemTextView.text = item.listname
+            progressBar.progress = item.progress
         }
     }
 

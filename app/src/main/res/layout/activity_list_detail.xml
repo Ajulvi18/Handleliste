@@ -16,32 +16,54 @@
         android:text="@string/List1_name"
         android:textAlignment="center"
         android:textAppearance="?attr/textAppearanceHeadline3"
-        app:layout_constraintBottom_toTopOf="@id/itemScrollView"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:id="@+id/itemScrollView"
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/list_detail_name">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/ListDetailCycler"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/listDetailScroller"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutManager="LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </ScrollView>
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="2dp"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/ListDetailCycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    app:layoutManager="LinearLayoutManager" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </FrameLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
         android:layout_width="match_parent"
         android:layout_height="99dp"
         android:orientation="horizontal"

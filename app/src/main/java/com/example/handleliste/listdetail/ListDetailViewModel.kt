@@ -49,7 +49,6 @@ class ListDetailViewModel(val dataSource: Datasource, context: Context) : ViewMo
         dataSource.firebaseSync(context)
     }
 
-
     fun updateProgress(){
         var checked = 0
         for (subList in listLiveData.value!!) {

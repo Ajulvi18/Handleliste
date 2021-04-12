@@ -5,12 +5,7 @@
     <string name="List1_name">Loading..</string>
 
 
-    <string name="flower_string">Flowers</string>
-    <string name="flower_finder">Flower finder</string>
-    <string name="flower_description_edit_text">Flower Description</string>
     <string name="list_name_edit_text">Name your list</string>
     <string name="done_button_text">Done</string>
     <string name="fab_content_description">fab</string>
-    <string name="flower_image_content_description">Image of flower</string>
-    <string name="remove_this_flower">Remove this flower</string>
 </resources>

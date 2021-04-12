@@ -49,6 +49,20 @@ class ItemListViewModel(val dataSource: Datasource, context: Context) : ViewMode
         }
     }
 
+    fun updateProgress(){
+        var checked = 0
+        for (subList in listLiveData.value!!) {
+
+            checked = 0
+            for (listItem in subList.array!!) {
+                checked += listItem.completion
+            }
+            if (subList.array!!.size != 0) {
+                subList.progress = (checked * 100) / subList.array!!.size
+            }
+        }
+    }
+
 }
 
 class ItemListViewModelFactory (private val context: Context) : ViewModelProvider.Factory {

@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume(){
         super.onResume()
-
+        itemListViewModel.updateProgress()
         val itemAdapter = ItemAdapter { subList -> onListClick(subList) }
         val recyclerView: RecyclerView = findViewById(R.id.ItemCycler)
         recyclerView.adapter = itemAdapter

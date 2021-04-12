@@ -13,6 +13,7 @@ import com.example.handleliste.data.ListItem
 import com.example.handleliste.data.subList
 import com.example.handleliste.databinding.ActivityMainBinding
 import com.example.handleliste.listdetail.ListDetailActivity
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var storage: FirebaseStorage
     private lateinit var binding: ActivityMainBinding
     lateinit var auth: FirebaseAuth
+    private lateinit var addListName: TextInputEditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +71,7 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             fabOnClick()
         }
+        addListName = findViewById(R.id.add_list_name)
 
     }
 
@@ -98,8 +101,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun fabOnClick() {
 
-        val intent = Intent(this, AddNewList::class.java)
-        startActivityForResult(intent, newItemActivityRequestCode)
+        if (addListName.text.isNullOrEmpty()) {
+            return
+        } else {
+            val listName = addListName.text.toString()
+            itemListViewModel.insertItem(listName, this)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {

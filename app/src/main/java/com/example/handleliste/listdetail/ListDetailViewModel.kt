@@ -31,15 +31,6 @@ class ListDetailViewModel(val dataSource: Datasource, context: Context) : ViewMo
         if (updatedList != null) {
             updatedList.add(0,newListItem)
         }
-    lateinit var updatedSubList:subList
-        if (currentList != null) {
-            updatedSubList = subList(
-                currentList.id,
-                updatedList,
-                currentList.listname
-            )
-        }
-
         if (currentList != null) {
             dataSource.updateList(currentList, newListItem, context)
         }

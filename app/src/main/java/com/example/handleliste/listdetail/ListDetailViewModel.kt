@@ -44,7 +44,7 @@ class ListDetailViewModel(val dataSource: Datasource, context: Context) : ViewMo
         var checked = 0
         for (subList in listLiveData.value!!) {
 
-
+            checked = 0
             for (listItem in subList.array!!) {
                 checked += listItem.completion
             }

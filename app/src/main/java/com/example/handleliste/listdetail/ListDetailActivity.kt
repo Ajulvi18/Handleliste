@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.CheckBox
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -26,11 +27,10 @@ class ListDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_detail)
-
         var currentListId: Long? = null
 
         val listName: TextView = findViewById(R.id.list_detail_name)
-
+        val listProgress: ProgressBar = findViewById(R.id.progressBar2)
         val bundle: Bundle? = intent.extras
         if (bundle != null) {
             currentListId = bundle.getLong(LIST_ID)
@@ -43,6 +43,9 @@ class ListDetailActivity : AppCompatActivity() {
         currentListId?.let {
             val currentList = listDetailViewModel.getListForId(it)
             listName.text = currentList?.listname
+            if (currentList != null) {
+                listProgress.progress = currentList.progress
+            }
             val aList = currentList?.array
             listDetailAdapter.submitList(aList)
 

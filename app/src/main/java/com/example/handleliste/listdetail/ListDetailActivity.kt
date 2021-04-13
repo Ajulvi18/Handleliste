@@ -22,7 +22,7 @@ class ListDetailActivity : AppCompatActivity() {
         ListDetailViewModelFactory(this)
     }
     private lateinit var addItemName: TextInputEditText
-
+    lateinit var currentList:subList
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +41,7 @@ class ListDetailActivity : AppCompatActivity() {
         recyclerView.adapter = listDetailAdapter
 
         currentListId?.let {
-            val currentList = listDetailViewModel.getListForId(it)
+            currentList = listDetailViewModel.getListForId(it)!!
             listName.text = currentList?.listname
             if (currentList != null) {
                 listProgress.progress = currentList.progress
@@ -57,6 +57,11 @@ class ListDetailActivity : AppCompatActivity() {
             }
         }
         addItemName = findViewById(R.id.add_item_name)
+        listDetailViewModel.listLiveData.observe(this, {
+            it?.let {
+                listProgress.progress = currentList.progress
+            }
+        })
     }
 
     private fun onListClick(listItem: ListItem, itemView: View) {

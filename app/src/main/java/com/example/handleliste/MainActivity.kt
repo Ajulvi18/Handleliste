@@ -58,13 +58,6 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = itemAdapter
         itemAdapter.submitList(emptyList<subList>())
 
-
-        itemListViewModel.listLiveData.observe(this, {
-            it?.let {
-                itemAdapter.submitList(it as MutableList<subList>)
-            }
-        })
-
         itemListViewModel.getData(this)
 
         val fab: View = findViewById(R.id.fab)
@@ -77,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume(){
         super.onResume()
-        itemListViewModel.updateProgress()
+        itemListViewModel.updateProgress(this)
         val itemAdapter = ItemAdapter { subList -> onListClick(subList) }
         val recyclerView: RecyclerView = findViewById(R.id.ItemCycler)
         recyclerView.adapter = itemAdapter
@@ -89,8 +82,6 @@ class MainActivity : AppCompatActivity() {
                 itemAdapter.submitList(it as MutableList<subList>)
             }
         })
-
-        itemListViewModel.getData(this)
     }
 
     private fun onListClick(sublist: subList) {
@@ -106,20 +97,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             val listName = addListName.text.toString()
             itemListViewModel.insertItem(listName, this)
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
-        super.onActivityResult(requestCode, resultCode, intentData)
-        /* Inserts flower into viewModel. */
-        if (requestCode == newItemActivityRequestCode && resultCode == Activity.RESULT_OK) {
-            if (requestCode == newItemActivityRequestCode && resultCode == Activity.RESULT_OK) {
-                intentData?.let { data ->
-                    val flowerName = data.getStringExtra(LIST_NAME)
-
-                    itemListViewModel.insertItem(flowerName, this)
-                }
-            }
         }
     }
 }

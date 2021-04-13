@@ -49,7 +49,7 @@ class ItemListViewModel(val dataSource: Datasource, context: Context) : ViewMode
         }
     }
 
-    fun updateProgress(){
+    fun updateProgress(context:Context){
         var checked = 0
         for (subList in listLiveData.value!!) {
 
@@ -61,6 +61,7 @@ class ItemListViewModel(val dataSource: Datasource, context: Context) : ViewMode
                 subList.progress = (checked * 100) / subList.array!!.size
             }
         }
+        dataSource.firebaseSync(context)
     }
 
 }

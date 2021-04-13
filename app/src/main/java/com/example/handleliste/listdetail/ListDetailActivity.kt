@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.CheckBox
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
@@ -21,16 +22,15 @@ class ListDetailActivity : AppCompatActivity() {
         ListDetailViewModelFactory(this)
     }
     private lateinit var addItemName: TextInputEditText
-
+    lateinit var currentList:subList
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_detail)
-
         var currentListId: Long? = null
 
         val listName: TextView = findViewById(R.id.list_detail_name)
-
+        val listProgress: ProgressBar = findViewById(R.id.progressBar2)
         val bundle: Bundle? = intent.extras
         if (bundle != null) {
             currentListId = bundle.getLong(LIST_ID)
@@ -41,8 +41,11 @@ class ListDetailActivity : AppCompatActivity() {
         recyclerView.adapter = listDetailAdapter
 
         currentListId?.let {
-            val currentList = listDetailViewModel.getListForId(it)
+            currentList = listDetailViewModel.getListForId(it)!!
             listName.text = currentList?.listname
+            if (currentList != null) {
+                listProgress.progress = currentList.progress
+            }
             val aList = currentList?.array
             listDetailAdapter.submitList(aList)
 
@@ -54,6 +57,11 @@ class ListDetailActivity : AppCompatActivity() {
             }
         }
         addItemName = findViewById(R.id.add_item_name)
+        listDetailViewModel.listLiveData.observe(this, {
+            it?.let {
+                listProgress.progress = currentList.progress
+            }
+        })
     }
 
     private fun onListClick(listItem: ListItem, itemView: View) {

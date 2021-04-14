@@ -1,18 +1,22 @@
 package com.example.handleliste.listdetail
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.CheckBox
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.handleliste.*
+import com.example.handleliste.LIST_ID
+import com.example.handleliste.R
 import com.example.handleliste.data.ListItem
 import com.example.handleliste.data.subList
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.android.synthetic.main.list_detail_card.*
+
 
 class ListDetailActivity : AppCompatActivity() {
     private val listDetailViewModel by viewModels<ListDetailViewModel> {
@@ -63,6 +67,14 @@ class ListDetailActivity : AppCompatActivity() {
 
     private fun onListClick(listItem: ListItem, itemView: View) {
         lateinit var checkBox: CheckBox
+        if (itemView.id == deleteButton.id){
+            listDetailViewModel.removeListItem(listItem, currentList, this)
+            listDetailViewModel.updateProgress()
+            finish();
+            startActivity(getIntent());
+            return
+        }
+
         if (listItem.completion == 1) {
             listItem.completion = 0
         } else {

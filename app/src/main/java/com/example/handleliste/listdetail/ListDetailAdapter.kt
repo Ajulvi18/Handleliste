@@ -5,6 +5,7 @@ import com.example.handleliste.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
@@ -19,11 +20,17 @@ class ListDetailAdapter(private val onClick: (ListItem, View) -> Unit) : ListAda
         private val itemTextView: TextView = itemView.findViewById(R.id.list_detail_text)
         private var currentItem: ListItem? = null
         private val itemCheckBox: CheckBox = itemView.findViewById(R.id.checkBox)
+        private val deleteButton: Button = itemView.findViewById(R.id.deleteButton)
 
         init{
             itemView.setOnClickListener {
                 currentItem?.let {
                     onClick(it, itemView)
+                }
+            }
+            deleteButton.setOnClickListener{
+                currentItem?.let {
+                    onClick(it, deleteButton)
                 }
             }
         }

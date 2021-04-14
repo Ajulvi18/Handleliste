@@ -59,6 +59,8 @@ class ItemListViewModel(val dataSource: Datasource, context: Context) : ViewMode
             }
             if (subList.array!!.size != 0) {
                 subList.progress = (checked * 100) / subList.array!!.size
+            } else {
+                subList.progress = 0
             }
         }
         dataSource.firebaseSync(context)

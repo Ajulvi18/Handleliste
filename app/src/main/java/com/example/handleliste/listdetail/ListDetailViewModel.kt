@@ -8,7 +8,6 @@ import com.example.handleliste.data.ListItem
 import com.example.handleliste.data.subList
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
-import kotlin.random.Random
 
 class ListDetailViewModel(val dataSource: Datasource, context: Context) : ViewModel() {
 

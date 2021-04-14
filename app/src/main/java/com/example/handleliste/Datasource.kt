@@ -4,14 +4,11 @@ package com.example.handleliste
 import android.content.Context
 import android.content.res.Resources
 import android.net.Uri
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.android.volley.RequestQueue
 import com.example.handleliste.data.*
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import java.io.File
 

@@ -1,15 +1,12 @@
 package com.example.handleliste
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.activity.viewModels
-import com.example.handleliste.data.ListItem
 import com.example.handleliste.data.subList
 import com.example.handleliste.databinding.ActivityMainBinding
 import com.example.handleliste.listdetail.ListDetailActivity

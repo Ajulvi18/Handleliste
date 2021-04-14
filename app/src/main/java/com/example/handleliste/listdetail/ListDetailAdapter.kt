@@ -11,8 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.handleliste.data.ListItem
-import com.example.handleliste.data.subList
-import com.example.handleliste.databinding.ItemCardBinding
+
 
 class ListDetailAdapter(private val onClick: (ListItem, View) -> Unit) : ListAdapter<ListItem, ListDetailAdapter.ListDetailViewHolder>(ItemDiffCallback) {
 

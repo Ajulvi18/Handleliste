@@ -1,8 +1,6 @@
 package com.example.handleliste.listdetail
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -14,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.handleliste.*
 import com.example.handleliste.data.ListItem
 import com.example.handleliste.data.subList
-import com.example.handleliste.listdetail.ListDetailViewModel
 import com.google.android.material.textfield.TextInputEditText
 
 class ListDetailActivity : AppCompatActivity() {
@@ -83,6 +80,7 @@ class ListDetailActivity : AppCompatActivity() {
         } else {
             val ItemName =  addItemName.text.toString()
             listDetailViewModel.insertItem(ItemName, context, id)
+            listDetailViewModel.updateProgress()
             finish();
             startActivity(getIntent());
         }

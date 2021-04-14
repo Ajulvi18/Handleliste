@@ -6,6 +6,7 @@
 
 
     <string name="list_name_edit_text">Name your list</string>
+    <string name="item_name_edit_text">Add a list item</string>
     <string name="done_button_text">Done</string>
     <string name="fab_content_description">fab</string>
 </resources>

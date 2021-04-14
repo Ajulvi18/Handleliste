@@ -53,7 +53,10 @@ class ListDetailViewModel(val dataSource: Datasource, context: Context) : ViewMo
         }
     }
 
-
+    fun removeListItem(itemToRemove: ListItem, listToRemoveFrom:subList, context: Context){
+        listToRemoveFrom.array?.remove(itemToRemove)
+        dataSource.firebaseSync(context)
+    }
 }
 
 class ListDetailViewModelFactory (private val context: Context) : ViewModelProvider.Factory {

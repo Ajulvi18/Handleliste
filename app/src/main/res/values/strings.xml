@@ -9,4 +9,5 @@
     <string name="item_name_edit_text">Add a list item</string>
     <string name="done_button_text">Done</string>
     <string name="fab_content_description">fab</string>
+    <string name="delete">delete</string>
 </resources>
